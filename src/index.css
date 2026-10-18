@@ -1,0 +1,90 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Base */
+  --color-canvas: #0e0f11;
+  --color-surface: #16181b;
+  --color-surface-2: #1e2125;
+  --color-line: #2a2e34;
+  --color-ink: #f2eee6;
+  --color-muted: #9aa0a8;
+
+  /* Mesa y acento */
+  --color-felt: #0f4d33;
+  --color-felt-2: #14663f;
+  --color-gold: #d9a93a;
+  --color-gold-soft: #f0cf7a;
+  --color-gold-ink: #1a1406;
+
+  /* Estados */
+  --color-win: #3dd68c;
+  --color-loss: #f0545c;
+  --color-warn: #f2b544;
+
+  /* Para cambiar la fuente de los títulos basta con tocar --font-display (y el <link> de index.html). */
+  --font-display: Outfit, sans-serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+  }
+  ::selection {
+    @apply bg-gold text-gold-ink;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface p-4;
+  }
+  .field {
+    @apply w-full rounded-xl border border-line bg-surface-2 px-3 py-2.5 text-[15px] text-ink transition-colors placeholder:text-muted/60;
+  }
+  .field:focus {
+    @apply border-gold outline-none ring-3 ring-gold/20;
+  }
+  .field:disabled {
+    @apply opacity-40;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-linear-to-b from-gold-soft to-gold px-4 py-3.5 text-[15px] font-bold text-gold-ink shadow-[0_6px_18px_rgba(217,169,58,0.25)] transition active:scale-[0.98] disabled:opacity-40;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-dashed border-line px-4 py-3 text-[15px] font-medium text-muted transition hover:border-muted hover:text-ink;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-surface-2 px-4 py-3.5 text-[15px] font-semibold text-ink transition hover:border-muted active:scale-[0.98];
+  }
+  .label {
+    @apply text-xs text-muted;
+  }
+}
+
+/* Selector de color (react-colorful) integrado con el tema */
+.chip-picker .react-colorful {
+  width: 100%;
+  height: 170px;
+}
+.chip-picker .react-colorful__saturation {
+  border-radius: 12px 12px 0 0;
+  border-bottom: 0;
+}
+.chip-picker .react-colorful__hue {
+  height: 16px;
+  border-radius: 0 0 12px 12px;
+}
+.chip-picker .react-colorful__pointer {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--color-ink);
+}

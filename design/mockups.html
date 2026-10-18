@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poker Calc — Paleta y mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@700;800&family=DM+Serif+Display&family=Bebas+Neue&family=Oswald:wght@500;600&family=Outfit:wght@600;700&family=Limelight&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Base */
+    --bg:        #0E0F11;  /* negro grafito */
+    --surface:   #16181B;  /* tarjetas */
+    --surface-2: #1E2125;  /* inputs, filas */
+    --border:    #2A2E34;
+    --text:      #F2EEE6;  /* marfil */
+    --muted:     #9AA0A8;
+
+    /* Mesa */
+    --felt:      #0F4D33;  /* fieltro */
+    --felt-2:    #14663F;
+    --gold:      #D9A93A;  /* acento principal / CTA */
+    --gold-soft: #F0CF7A;
+
+    /* Fichas */
+    --chip-white: #ECE7DC;
+    --chip-red:   #C62F3A;
+    --chip-blue:  #2E6BD1;
+    --chip-green: #1F9D5C;
+    --chip-black: #26282C;
+    --chip-yellow:#E3B53E;
+
+    /* Estados */
+    --win:  #3DD68C;
+    --loss: #F0545C;
+    --warn: #F2B544;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #08090A; color: var(--text); font-family: Inter, system-ui, sans-serif; padding: 48px 32px 96px; }
+  h1, h2, .brand { font-family: Cinzel, serif; letter-spacing: .04em; }
+  .mono { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+  .doc-title { font-size: 36px; color: var(--gold); }
+  .doc-sub { color: var(--muted); margin: 8px 0 48px; max-width: 720px; line-height: 1.5; }
+  .section-title { font-size: 22px; margin: 56px 0 20px; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+
+  /* ---------- Paleta ---------- */
+  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+  .sw { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .sw .c { height: 72px; }
+  .sw .l { padding: 10px 12px; font-size: 12px; line-height: 1.5; }
+  .sw .l b { display: block; font-size: 13px; }
+  .sw .l span { color: var(--muted); }
+  .group-label { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 24px 0 10px; }
+
+  .type-row { display: flex; gap: 32px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .type-row div { min-width: 200px; }
+  .type-row small { color: var(--muted); display: block; margin-top: 4px; font-size: 12px; }
+
+  /* ---------- Ficha ---------- */
+  .chip {
+    --c: var(--chip-red);
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; position: relative;
+    background:
+      radial-gradient(circle, var(--c) 0 46%, rgba(255,255,255,.85) 47% 50%, var(--c) 51% 64%, transparent 65%),
+      repeating-conic-gradient(var(--c) 0 22.5deg, #F7F3EA 22.5deg 45deg);
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.25), 0 3px 6px rgba(0,0,0,.55);
+  }
+  .chip.lg { width: 64px; height: 64px; }
+  .chip.sm { width: 28px; height: 28px; }
+  .chip.white { --c: var(--chip-white); background:
+      radial-gradient(circle, var(--c) 0 46%, #9AA0A8 47% 50%, var(--c) 51% 64%, transparent 65%),
+      repeating-conic-gradient(var(--c) 0 22.5deg, #2E6BD1 22.5deg 45deg); }
+  .chip.red { --c: var(--chip-red); }
+  .chip.blue { --c: var(--chip-blue); }
+  .chip.green { --c: var(--chip-green); }
+  .chip.black { --c: var(--chip-black); }
+  .chip.yellow { --c: var(--chip-yellow); }
+  .chips-showcase { display: flex; gap: 18px; align-items: center; background: radial-gradient(ellipse at center, var(--felt-2), var(--felt) 70%); border-radius: 16px; padding: 28px; flex-wrap: wrap; }
+
+  /* ---------- Frames ---------- */
+  .frames { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start; }
+  .frame-wrap p { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+  .phone { width: 375px; min-height: 812px; background: var(--bg); border: 1px solid var(--border); border-radius: 36px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 30px 60px rgba(0,0,0,.6); }
+  .desktop { width: 1280px; min-height: 800px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.6); }
+
+  /* ---------- UI de la app ---------- */
+  .appbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #121417, var(--bg)); }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 18px; color: var(--gold); font-weight: 700; }
+  .pill { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text); }
+
+  .stepper { display: flex; gap: 6px; padding: 14px 20px; }
+  .stepper div { flex: 1; text-align: center; font-size: 11px; color: var(--muted); padding-top: 8px; border-top: 3px solid var(--border); }
+  .stepper .on { color: var(--gold); border-color: var(--gold); }
+  .stepper .done { color: var(--text); border-color: var(--felt-2); }
+
+  .content { padding: 4px 16px 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .h { font-family: Cinzel, serif; font-size: 20px; margin: 8px 4px 2px; }
+  .hint { color: var(--muted); font-size: 13px; margin: 0 4px 6px; line-height: 1.4; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+  .row { display: flex; align-items: center; gap: 12px; }
+  .grow { flex: 1; min-width: 0; }
+  .label { font-size: 12px; color: var(--muted); }
+  .val { font-weight: 600; }
+  .input { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; font-size: 15px; min-width: 86px; text-align: right; }
+  .input.focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(217,169,58,.18); }
+  .seg { display: flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+  .seg span { flex: 1; text-align: center; padding: 8px 0; font-size: 13px; border-radius: 8px; color: var(--muted); }
+  .seg .on { background: var(--gold); color: #1A1406; font-weight: 700; }
+  .btn { display: block; text-align: center; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 15px; }
+  .btn.primary { background: linear-gradient(180deg, var(--gold-soft), var(--gold)); color: #1A1406; box-shadow: 0 6px 18px rgba(217,169,58,.25); }
+  .btn.ghost { border: 1px dashed var(--border); color: var(--muted); font-weight: 500; }
+  .footer-cta { padding: 14px 16px 26px; border-top: 1px solid var(--border); background: var(--surface); }
+  .icon-btn { width: 32px; height: 32px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); display: grid; place-items: center; color: var(--muted); font-size: 14px; }
+
+  .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #fff; flex-shrink: 0; }
+  .chip-mini-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+  .chip-mini { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 13px; }
+
+  .banner { border-radius: 12px; padding: 10px 12px; font-size: 13px; display: flex; gap: 10px; align-items: center; }
+  .banner.ok { background: rgba(61,214,140,.1); border: 1px solid rgba(61,214,140,.35); color: var(--win); }
+  .banner.warn { background: rgba(242,181,68,.1); border: 1px solid rgba(242,181,68,.35); color: var(--warn); }
+
+  .hero-felt { border-radius: 16px; padding: 18px; background: radial-gradient(ellipse at 50% 0%, var(--felt-2), var(--felt) 75%); border: 1px solid #1d7a4f; display: flex; align-items: center; gap: 14px; }
+  .win { color: var(--win); } .loss { color: var(--loss); }
+  .bar { height: 6px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .bar i { display: block; height: 100%; border-radius: 99px; }
+  .settle { display: flex; align-items: center; gap: 8px; font-size: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .settle:last-child { border-bottom: 0; }
+  .arrow { color: var(--gold); }
+
+  /* Desktop layout */
+  .d-body { display: grid; grid-template-columns: 340px 1fr 360px; gap: 20px; padding: 24px; }
+  .d-col { display: flex; flex-direction: column; gap: 14px; }
+  .d-title { font-family: Cinzel, serif; font-size: 16px; color: var(--gold); letter-spacing: .06em; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; color: var(--muted); font-weight: 500; font-size: 12px; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  td { padding: 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  td .input { padding: 7px 10px; font-size: 14px; min-width: 70px; }
+  .t-right { text-align: right; }
+</style>
+</head>
+<body>
+
+<h1 class="doc-title">Poker Calc</h1>
+<p class="doc-sub">Propuesta de paleta, tipografía y pantallas base (móvil 375 × 812 y desktop 1280 × 800). Estilo sobrio: fondo grafito, acentos de fieltro verde y oro, y los colores clásicos de ficha reservados para las propias fichas y los estados de ganancia/pérdida.</p>
+
+<!-- ================= PALETA ================= -->
+<h2 class="section-title">1 · Paleta</h2>
+
+<div class="group-label">Base (UI)</div>
+<div class="palette">
+  <div class="sw"><div class="c" style="background:#0E0F11"></div><div class="l"><b>Grafito</b><span>bg · #0E0F11</span></div></div>
+  <div class="sw"><div class="c" style="background:#16181B"></div><div class="l"><b>Superficie</b><span>surface · #16181B</span></div></div>
+  <div class="sw"><div class="c" style="background:#1E2125"></div><div class="l"><b>Superficie 2</b><span>surface-2 · #1E2125</span></div></div>
+  <div class="sw"><div class="c" style="background:#2A2E34"></div><div class="l"><b>Borde</b><span>border · #2A2E34</span></div></div>
+  <div class="sw"><div class="c" style="background:#F2EEE6"></div><div class="l"><b>Marfil</b><span>text · #F2EEE6</span></div></div>
+  <div class="sw"><div class="c" style="background:#9AA0A8"></div><div class="l"><b>Humo</b><span>muted · #9AA0A8</span></div></div>
+</div>
+
+<div class="group-label">Mesa y acento</div>
+<div class="palette">
+  <div class="sw"><div class="c" style="background:#0F4D33"></div><div class="l"><b>Fieltro</b><span>felt · #0F4D33</span></div></div>
+  <div class="sw"><div class="c" style="background:#14663F"></div><div class="l"><b>Fieltro claro</b><span>felt-2 · #14663F</span></div></div>
+  <div class="sw"><div class="c" style="background:#D9A93A"></div><div class="l"><b>Oro</b><span>gold · #D9A93A (CTA)</span></div></div>
+  <div class="sw"><div class="c" style="background:#F0CF7A"></div><div class="l"><b>Oro suave</b><span>gold-soft · #F0CF7A</span></div></div>
+</div>
+
+<div class="group-label">Fichas</div>
+<div class="palette">
+  <div class="sw"><div class="c" style="background:#ECE7DC"></div><div class="l"><b>Blanca</b><span>#ECE7DC</span></div></div>
+  <div class="sw"><div class="c" style="background:#C62F3A"></div><div class="l"><b>Roja</b><span>#C62F3A</span></div></div>
+  <div class="sw"><div class="c" style="background:#2E6BD1"></div><div class="l"><b>Azul</b><span>#2E6BD1</span></div></div>
+  <div class="sw"><div class="c" style="background:#1F9D5C"></div><div class="l"><b>Verde</b><span>#1F9D5C</span></div></div>
+  <div class="sw"><div class="c" style="background:#26282C;border-bottom:1px solid #2A2E34"></div><div class="l"><b>Negra</b><span>#26282C</span></div></div>
+  <div class="sw"><div class="c" style="background:#E3B53E"></div><div class="l"><b>Amarilla</b><span>#E3B53E</span></div></div>
+</div>
+
+<div class="group-label">Estados</div>
+<div class="palette">
+  <div class="sw"><div class="c" style="background:#3DD68C"></div><div class="l"><b>Gana</b><span>win · #3DD68C</span></div></div>
+  <div class="sw"><div class="c" style="background:#F0545C"></div><div class="l"><b>Pierde</b><span>loss · #F0545C</span></div></div>
+  <div class="sw"><div class="c" style="background:#F2B544"></div><div class="l"><b>Aviso</b><span>warn · #F2B544</span></div></div>
+</div>
+
+<div class="group-label">Fichas sobre fieltro (componente)</div>
+<div class="chips-showcase">
+  <div class="chip lg white"></div><div class="chip lg red"></div><div class="chip lg blue"></div>
+  <div class="chip lg green"></div><div class="chip lg black"></div><div class="chip lg yellow"></div>
+</div>
+
+<div class="group-label">Tipografía</div>
+<div class="type-row">
+  <div><div style="font-family:Cinzel,serif;font-size:28px;color:var(--gold)">Cinzel</div><small>Títulos y marca · 600/700</small></div>
+  <div><div style="font-size:24px">Inter</div><small>Interfaz y texto · 400–700</small></div>
+  <div><div class="mono" style="font-size:24px">+42,50 €</div><small>JetBrains Mono · cifras tabulares</small></div>
+</div>
+
+<div class="group-label">Alternativas para títulos (sustituyen a Cinzel)</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px">
+  <div class="card" style="padding:20px">
+    <div class="label" style="margin-bottom:10px">A · Playfair Display</div>
+    <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:30px;color:var(--gold);display:flex;align-items:center;gap:10px"><div class="chip sm red"></div>Poker Calc</div>
+    <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:22px;margin-top:10px">Valor de las fichas</div>
+    <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:20px;margin-top:6px">Gran ganadora · Ana</div>
+    <small style="color:var(--muted);display:block;margin-top:10px;font-size:12px">Serif elegante y editorial. Clásica sin ser recargada.</small>
+  </div>
+  <div class="card" style="padding:20px">
+    <div class="label" style="margin-bottom:10px">B · DM Serif Display</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:30px;color:var(--gold);display:flex;align-items:center;gap:10px"><div class="chip sm red"></div>Poker Calc</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-top:10px">Valor de las fichas</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:20px;margin-top:6px">Gran ganadora · Ana</div>
+    <small style="color:var(--muted);display:block;margin-top:10px;font-size:12px">Serif con mucho contraste, más cálida y redonda.</small>
+  </div>
+  <div class="card" style="padding:20px">
+    <div class="label" style="margin-bottom:10px">C · Bebas Neue</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.03em;color:var(--gold);display:flex;align-items:center;gap:10px"><div class="chip sm red"></div>Poker Calc</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.03em;margin-top:10px">Valor de las fichas</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.03em;margin-top:6px">Gran ganadora · Ana</div>
+    <small style="color:var(--muted);display:block;margin-top:10px;font-size:12px">Condensada en mayúsculas, estilo cartel de torneo.</small>
+  </div>
+  <div class="card" style="padding:20px">
+    <div class="label" style="margin-bottom:10px">D · Oswald</div>
+    <div style="font-family:Oswald,sans-serif;font-weight:600;font-size:30px;color:var(--gold);display:flex;align-items:center;gap:10px"><div class="chip sm red"></div>Poker Calc</div>
+    <div style="font-family:Oswald,sans-serif;font-weight:600;font-size:22px;margin-top:10px">Valor de las fichas</div>
+    <div style="font-family:Oswald,sans-serif;font-weight:600;font-size:20px;margin-top:6px">Gran ganadora · Ana</div>
+    <small style="color:var(--muted);display:block;margin-top:10px;font-size:12px">Condensada, pero más legible en minúsculas.</small>
+  </div>
+  <div class="card" style="padding:20px">
+    <div class="label" style="margin-bottom:10px">E · Outfit</div>
+    <div style="font-family:Outfit,sans-serif;font-weight:700;font-size:30px;color:var(--gold);display:flex;align-items:center;gap:10px"><div class="chip sm red"></div>Poker Calc</div>
+    <div style="font-family:Outfit,sans-serif;font-weight:700;font-size:22px;margin-top:10px">Valor de las fichas</div>
+    <div style="font-family:Outfit,sans-serif;font-weight:700;font-size:20px;margin-top:6px">Gran ganadora · Ana</div>
+    <small style="color:var(--muted);display:block;margin-top:10px;font-size:12px">Geométrica moderna. La más limpia, con aire de app.</small>
+  </div>
+  <div class="card" style="padding:20px">
+    <div class="label" style="margin-bottom:10px">F · Limelight</div>
+    <div style="font-family:Limelight,serif;font-size:30px;color:var(--gold);display:flex;align-items:center;gap:10px"><div class="chip sm red"></div>Poker Calc</div>
+    <div style="font-family:Limelight,serif;font-size:22px;margin-top:10px">Valor de las fichas</div>
+    <div style="font-family:Limelight,serif;font-size:20px;margin-top:6px">Gran ganadora · Ana</div>
+    <small style="color:var(--muted);display:block;margin-top:10px;font-size:12px">Art déco. La más "casino de Las Vegas".</small>
+  </div>
+</div>
+
+<!-- ================= MÓVIL ================= -->
+<h2 class="section-title">2 · Móvil (375 × 812)</h2>
+<div class="frames">
+
+  <!-- Paso 1: Fichas -->
+  <div class="frame-wrap">
+    <p>Paso 1 — Fichas y divisa</p>
+    <div class="phone">
+      <div class="appbar"><div class="brand"><div class="chip sm red"></div>Poker Calc</div><span class="pill">EUR €</span></div>
+      <div class="stepper"><div class="on">1 · Fichas</div><div>2 · Jugadores</div><div>3 · Resultado</div></div>
+      <div class="content">
+        <div class="h">Valor de las fichas</div>
+        <div class="hint">Activa las fichas que se usan en la partida y dales un valor.</div>
+        <div class="card">
+          <div class="label" style="margin-bottom:8px">Divisa</div>
+          <div class="seg"><span class="on">€ EUR</span><span>$ USD</span><span>£ GBP</span></div>
+        </div>
+        <div class="card row"><div class="chip white"></div><div class="grow"><div class="val">Blanca</div><div class="label">activa</div></div><div class="input mono">0,05 €</div></div>
+        <div class="card row"><div class="chip red"></div><div class="grow"><div class="val">Roja</div><div class="label">activa</div></div><div class="input mono focus">0,25 €</div></div>
+        <div class="card row"><div class="chip blue"></div><div class="grow"><div class="val">Azul</div><div class="label">activa</div></div><div class="input mono">1,00 €</div></div>
+        <div class="card row"><div class="chip green"></div><div class="grow"><div class="val">Verde</div><div class="label">activa</div></div><div class="input mono">5,00 €</div></div>
+        <div class="card row" style="opacity:.45"><div class="chip black"></div><div class="grow"><div class="val">Negra</div><div class="label">no se usa</div></div><div class="input mono">—</div></div>
+        <div class="btn ghost">+ Añadir ficha personalizada</div>
+      </div>
+      <div class="footer-cta"><div class="btn primary">Siguiente · Jugadores</div></div>
+    </div>
+  </div>
+
+  <!-- Paso 2: Jugadores -->
+  <div class="frame-wrap">
+    <p>Paso 2 — Jugadores (inicio / final)</p>
+    <div class="phone">
+      <div class="appbar"><div class="brand"><div class="chip sm red"></div>Poker Calc</div><span class="pill">EUR €</span></div>
+      <div class="stepper"><div class="done">1 · Fichas</div><div class="on">2 · Jugadores</div><div>3 · Resultado</div></div>
+      <div class="content">
+        <div class="h">Jugadores</div>
+        <div class="seg"><span>Inicio</span><span class="on">Final</span></div>
+
+        <div class="card">
+          <div class="row">
+            <div class="avatar" style="background:var(--chip-red)">A</div>
+            <div class="grow"><div class="val">Ana</div><div class="label">Inicio 20,00 € · Final <span class="mono">34,75 €</span></div></div>
+            <div class="icon-btn">⌄</div>
+          </div>
+          <div class="chip-mini-row">
+            <div class="chip-mini"><div class="chip sm white"></div><span class="mono">15</span></div>
+            <div class="chip-mini"><div class="chip sm red"></div><span class="mono">12</span></div>
+            <div class="chip-mini"><div class="chip sm blue"></div><span class="mono">11</span></div>
+            <div class="chip-mini"><div class="chip sm green"></div><span class="mono">4</span></div>
+          </div>
+        </div>
+
+        <div class="card row"><div class="avatar" style="background:var(--chip-blue)">B</div><div class="grow"><div class="val">Bruno</div><div class="label">Inicio 20,00 € · Final <span class="mono">11,50 €</span></div></div><div class="icon-btn">›</div></div>
+        <div class="card row"><div class="avatar" style="background:var(--chip-green)">C</div><div class="grow"><div class="val">Carla</div><div class="label">Inicio 20,00 € · Final <span class="mono">22,25 €</span></div></div><div class="icon-btn">›</div></div>
+        <div class="card row"><div class="avatar" style="background:#7A5AC8">D</div><div class="grow"><div class="val">Dani</div><div class="label">Inicio 20,00 € · Final <span class="mono">11,50 €</span></div></div><div class="icon-btn">›</div></div>
+        <div class="btn ghost">+ Añadir jugador</div>
+
+        <div class="banner ok">✓ Cuadra: 80,00 € en juego = 80,00 € al final</div>
+      </div>
+      <div class="footer-cta"><div class="btn primary">Calcular resultado</div></div>
+    </div>
+  </div>
+
+  <!-- Paso 3: Resultado -->
+  <div class="frame-wrap">
+    <p>Paso 3 — Resultado y liquidación</p>
+    <div class="phone">
+      <div class="appbar"><div class="brand"><div class="chip sm red"></div>Poker Calc</div><span class="pill">EUR €</span></div>
+      <div class="stepper"><div class="done">1 · Fichas</div><div class="done">2 · Jugadores</div><div class="on">3 · Resultado</div></div>
+      <div class="content">
+        <div class="hero-felt">
+          <div class="chip lg yellow"></div>
+          <div><div class="label" style="color:#cfe8da">Gran ganadora</div><div style="font-family:Cinzel,serif;font-size:22px">Ana</div><div class="mono win" style="font-size:22px;font-weight:700">+14,75 €</div></div>
+        </div>
+
+        <div class="card">
+          <div class="row"><div class="avatar" style="background:var(--chip-red)">A</div><div class="grow val">Ana</div><div class="mono win val">+14,75 €</div></div>
+          <div class="bar"><i style="width:100%;background:var(--win)"></i></div>
+        </div>
+        <div class="card">
+          <div class="row"><div class="avatar" style="background:var(--chip-green)">C</div><div class="grow val">Carla</div><div class="mono win val">+2,25 €</div></div>
+          <div class="bar"><i style="width:15%;background:var(--win)"></i></div>
+        </div>
+        <div class="card">
+          <div class="row"><div class="avatar" style="background:var(--chip-blue)">B</div><div class="grow val">Bruno</div><div class="mono loss val">−8,50 €</div></div>
+          <div class="bar"><i style="width:58%;background:var(--loss)"></i></div>
+        </div>
+        <div class="card">
+          <div class="row"><div class="avatar" style="background:#7A5AC8">D</div><div class="grow val">Dani</div><div class="mono loss val">−8,50 €</div></div>
+          <div class="bar"><i style="width:58%;background:var(--loss)"></i></div>
+        </div>
+
+        <div class="card">
+          <div class="label" style="margin-bottom:4px">Quién paga a quién</div>
+          <div class="settle"><b>Bruno</b><span class="arrow">→</span><b>Ana</b><span class="grow"></span><span class="mono">8,50 €</span></div>
+          <div class="settle"><b>Dani</b><span class="arrow">→</span><b>Ana</b><span class="grow"></span><span class="mono">6,25 €</span></div>
+          <div class="settle"><b>Dani</b><span class="arrow">→</span><b>Carla</b><span class="grow"></span><span class="mono">2,25 €</span></div>
+        </div>
+      </div>
+      <div class="footer-cta row"><div class="btn ghost grow">Editar</div><div class="btn primary grow">Compartir</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= DESKTOP ================= -->
+<h2 class="section-title">3 · Desktop (1280 × 800)</h2>
+<p class="doc-sub" style="margin-bottom:20px">En desktop los tres pasos conviven en una sola vista de tres columnas y el resultado se recalcula en vivo.</p>
+<div class="desktop">
+  <div class="appbar" style="padding:18px 24px">
+    <div class="brand" style="font-size:22px"><div class="chip red"></div>Poker Calc</div>
+    <div class="row"><span class="pill">Partida del sábado</span><span class="pill">EUR €</span><div class="btn ghost" style="padding:8px 14px;font-size:13px">Nueva partida</div></div>
+  </div>
+  <div class="d-body">
+    <!-- Col 1 -->
+    <div class="d-col">
+      <div class="d-title">Fichas</div>
+      <div class="card"><div class="label" style="margin-bottom:8px">Divisa</div><div class="seg"><span class="on">€ EUR</span><span>$ USD</span><span>£ GBP</span></div></div>
+      <div class="card row"><div class="chip white"></div><div class="grow val">Blanca</div><div class="input mono">0,05 €</div></div>
+      <div class="card row"><div class="chip red"></div><div class="grow val">Roja</div><div class="input mono">0,25 €</div></div>
+      <div class="card row"><div class="chip blue"></div><div class="grow val">Azul</div><div class="input mono">1,00 €</div></div>
+      <div class="card row"><div class="chip green"></div><div class="grow val">Verde</div><div class="input mono">5,00 €</div></div>
+      <div class="btn ghost">+ Añadir ficha</div>
+    </div>
+
+    <!-- Col 2 -->
+    <div class="d-col">
+      <div class="row"><div class="d-title grow">Jugadores · fichas finales</div><div class="seg" style="width:200px"><span>Inicio</span><span class="on">Final</span></div></div>
+      <div class="card" style="padding:4px 6px">
+        <table>
+          <thead><tr><th>Jugador</th><th class="t-right"><div class="chip sm white" style="margin-left:auto"></div></th><th class="t-right"><div class="chip sm red" style="margin-left:auto"></div></th><th class="t-right"><div class="chip sm blue" style="margin-left:auto"></div></th><th class="t-right"><div class="chip sm green" style="margin-left:auto"></div></th><th class="t-right">Total</th></tr></thead>
+          <tbody>
+            <tr><td><div class="row"><div class="avatar" style="background:var(--chip-red);width:28px;height:28px;font-size:12px">A</div>Ana</div></td><td class="t-right"><span class="input mono">15</span></td><td class="t-right"><span class="input mono">12</span></td><td class="t-right"><span class="input mono">11</span></td><td class="t-right"><span class="input mono focus">4</span></td><td class="t-right mono val">34,75 €</td></tr>
+            <tr><td><div class="row"><div class="avatar" style="background:var(--chip-blue);width:28px;height:28px;font-size:12px">B</div>Bruno</div></td><td class="t-right"><span class="input mono">10</span></td><td class="t-right"><span class="input mono">4</span></td><td class="t-right"><span class="input mono">5</span></td><td class="t-right"><span class="input mono">1</span></td><td class="t-right mono val">11,50 €</td></tr>
+            <tr><td><div class="row"><div class="avatar" style="background:var(--chip-green);width:28px;height:28px;font-size:12px">C</div>Carla</div></td><td class="t-right"><span class="input mono">5</span></td><td class="t-right"><span class="input mono">8</span></td><td class="t-right"><span class="input mono">5</span></td><td class="t-right"><span class="input mono">3</span></td><td class="t-right mono val">22,25 €</td></tr>
+            <tr><td><div class="row"><div class="avatar" style="background:#7A5AC8;width:28px;height:28px;font-size:12px">D</div>Dani</div></td><td class="t-right"><span class="input mono">10</span></td><td class="t-right"><span class="input mono">4</span></td><td class="t-right"><span class="input mono">5</span></td><td class="t-right"><span class="input mono">1</span></td><td class="t-right mono val">11,50 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn ghost">+ Añadir jugador</div>
+      <div class="banner ok">✓ Cuadra: 80,00 € en juego = 80,00 € al final</div>
+      <div class="banner warn">Ejemplo de aviso: faltan 1,25 € — revisa las fichas de algún jugador</div>
+    </div>
+
+    <!-- Col 3 -->
+    <div class="d-col">
+      <div class="d-title">Resultado</div>
+      <div class="hero-felt"><div class="chip lg yellow"></div><div><div class="label" style="color:#cfe8da">Gran ganadora</div><div style="font-family:Cinzel,serif;font-size:22px">Ana</div><div class="mono win" style="font-size:24px;font-weight:700">+14,75 €</div></div></div>
+      <div class="card">
+        <div class="row" style="padding:6px 0"><div class="grow">Ana</div><div class="mono win val">+14,75 €</div></div>
+        <div class="row" style="padding:6px 0"><div class="grow">Carla</div><div class="mono win val">+2,25 €</div></div>
+        <div class="row" style="padding:6px 0"><div class="grow">Bruno</div><div class="mono loss val">−8,50 €</div></div>
+        <div class="row" style="padding:6px 0"><div class="grow">Dani</div><div class="mono loss val">−8,50 €</div></div>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:4px">Quién paga a quién</div>
+        <div class="settle"><b>Bruno</b><span class="arrow">→</span><b>Ana</b><span class="grow"></span><span class="mono">8,50 €</span></div>
+        <div class="settle"><b>Dani</b><span class="arrow">→</span><b>Ana</b><span class="grow"></span><span class="mono">6,25 €</span></div>
+        <div class="settle"><b>Dani</b><span class="arrow">→</span><b>Carla</b><span class="grow"></span><span class="mono">2,25 €</span></div>
+      </div>
+      <div class="btn primary">Compartir resultado</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
