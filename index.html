@@ -2,20 +2,110 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Calculadora de póker: quién paga a quién | Poker Calc</title>
+    <meta
+      name="description"
+      content="Calcula cuánto gana o pierde cada jugador en tu partida de póker con amigos y quién paga a quién. Fichas personalizadas y recompras. Gratis y sin registro."
+    />
+    <!-- El marcador de la URL lo sustituye vite.config.ts por la de producción (plugin "seo") -->
+    <link rel="canonical" href="%SITE_URL%/" />
     <meta name="theme-color" content="#0E0F11" />
-    <meta name="description" content="Calcula cuánto gana o pierde cada jugador en tu partida de póker y quién paga a quién." />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Vista previa al compartir el enlace (WhatsApp, Instagram, X, Telegram…) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Poker Calc" />
+    <meta property="og:title" content="Poker Calc · ¿Quién paga a quién?" />
+    <meta property="og:description" content="Calculadora de fichas para tu partida de póker con amigos. Gratis, sin registro, en el móvil y en el PC." />
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta property="og:image" content="%SITE_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Poker Calc: ¿quién paga a quién? Calculadora de fichas de póker" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Poker Calc",
+        "url": "%SITE_URL%/",
+        "description": "Calculadora de ganancias para partidas de póker caseras: convierte las fichas en dinero y calcula quién paga a quién.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "es",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+      }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Outfit:wght@600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Poker Calc</title>
   </head>
   <body>
+    <noscript>
+      <p style="padding: 16px; text-align: center">Poker Calc necesita JavaScript para funcionar.</p>
+    </noscript>
     <div id="root"></div>
+
+    <!--
+      Contenido estático para buscadores y para quien llega por primera vez.
+      Va fuera de React a propósito: así está en el HTML que descarga Google, sin esperar a que se ejecute JavaScript.
+    -->
+    <section class="mx-auto max-w-3xl border-t border-line px-4 pt-10 pb-36 text-[15px] leading-relaxed text-muted lg:pb-16">
+      <h2 class="font-display text-2xl font-bold text-ink">Calculadora de póker para partidas con amigos</h2>
+      <p class="mt-3">
+        Poker Calc te dice cuánto ha ganado o perdido cada jugador al final de una partida de póker casera y
+        <strong class="text-ink">quién tiene que pagar a quién</strong>. Es gratis, no hace falta registrarse y funciona
+        en el móvil y en el ordenador.
+      </p>
+
+      <h3 class="mt-8 font-display text-lg font-bold text-ink">Cómo funciona</h3>
+      <ol class="mt-3 list-decimal space-y-2 pl-5 marker:text-gold">
+        <li><strong class="text-ink">Fichas:</strong> dale un valor a cada color de ficha (blanca, roja, azul, verde…) o crea las tuyas con su propio color.</li>
+        <li><strong class="text-ink">Jugadores:</strong> apunta lo que ha puesto cada uno (entrada y recompras) y con cuántas fichas ha terminado.</li>
+        <li><strong class="text-ink">Resultado:</strong> la calculadora convierte las fichas en dinero, comprueba que las cuentas cuadran y te dice quién paga a quién con el menor número de pagos.</li>
+      </ol>
+
+      <h3 class="mt-8 font-display text-lg font-bold text-ink">Preguntas frecuentes</h3>
+      <div class="mt-3 divide-y divide-line rounded-2xl border border-line bg-surface">
+        <details class="group px-4 py-3">
+          <summary class="cursor-pointer font-semibold text-ink marker:text-gold">¿Cómo se calcula lo que gana cada jugador?</summary>
+          <p class="mt-2">Se suma el valor de las fichas con las que ha terminado y se le resta todo lo que ha puesto en la partida (la entrada más las recompras). Si sale positivo, gana; si sale negativo, pierde.</p>
+        </details>
+        <details class="px-4 py-3">
+          <summary class="cursor-pointer font-semibold text-ink marker:text-gold">¿Qué pasa si alguien recompra fichas?</summary>
+          <p class="mt-2">Cada jugador tiene un botón de recompra. Lo que pone en cada recompra se suma a lo que ha aportado, así que el cálculo final lo tiene en cuenta.</p>
+        </details>
+        <details class="px-4 py-3">
+          <summary class="cursor-pointer font-semibold text-ink marker:text-gold">¿Y si las cuentas no cuadran?</summary>
+          <p class="mt-2">La app compara el dinero aportado con el valor de las fichas que hay en la mesa y te avisa de cuánto falta o sobra. Normalmente es una ficha mal contada o una recompra sin apuntar.</p>
+        </details>
+        <details class="px-4 py-3">
+          <summary class="cursor-pointer font-semibold text-ink marker:text-gold">¿Tengo que registrarme o pagar algo?</summary>
+          <p class="mt-2">No. La partida se guarda solo en tu navegador. Para compartir el resultado se genera un enlace que lleva los datos dentro, así que no pasan por ningún servidor.</p>
+        </details>
+        <details class="px-4 py-3">
+          <summary class="cursor-pointer font-semibold text-ink marker:text-gold">¿Funciona con dólares o libras?</summary>
+          <p class="mt-2">Sí. Puedes elegir entre euros (€), dólares ($) y libras (£).</p>
+        </details>
+      </div>
+
+      <p class="mt-8 text-xs">
+        Poker Calc no es un sitio de apuestas: solo hace las cuentas de partidas entre amigos.
+        <a class="underline decoration-line underline-offset-2 hover:text-ink" href="https://github.com/sergiouva/poker-calc">Código en GitHub</a>
+      </p>
+    </section>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

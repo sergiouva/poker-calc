@@ -85,6 +85,12 @@ La web está en [Vercel](https://vercel.com), conectada a este repositorio:
 
 Vercel detecta Vite solo (build `npm run build`, salida `dist/`), así que no hace falta configuración extra. La versión de Node sale del campo `engines` de `package.json`.
 
+### SEO y vista previa al compartir
+
+- `index.html` lleva el título, la descripción, las etiquetas Open Graph (la tarjeta que sale en WhatsApp o Instagram), los datos estructurados JSON-LD y una sección de texto estático ("Cómo funciona" y preguntas frecuentes) que Google puede leer sin ejecutar JavaScript.
+- La URL pública no está escrita a mano. El plugin `seo` de `vite.config.ts` sustituye `%SITE_URL%` en el build y genera `robots.txt` y `sitemap.xml`. En Vercel la toma de `VERCEL_PROJECT_PRODUCTION_URL`, así que si cambias de dominio se actualiza sola. Para forzarla, define `SITE_URL`.
+- Las imágenes están en `public/`: `og-image.png` (1200×630) y los iconos para instalarla en el móvil (`manifest.webmanifest`).
+
 ## Por hacer
 
 - [x] Comprobar que la partida cuadra (guía en [`docs/guia-comprobar-cuadre.md`](docs/guia-comprobar-cuadre.md))

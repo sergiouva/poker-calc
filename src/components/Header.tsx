@@ -7,7 +7,7 @@ export function Header({ children }: { children?: ReactNode }) {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3.5 lg:px-6">
         <div className="flex items-center gap-2.5">
           <ChipToken color="#C62F3A" size={28} />
-          <span className="font-display text-xl font-bold tracking-wide text-gold">Poker Calc</span>
+          <h1 className="font-display text-xl font-bold tracking-wide text-gold">Poker Calc</h1>
         </div>
         <div className="flex items-center gap-2">{children}</div>
       </div>
