@@ -17,7 +17,7 @@ npm run build    # tsc -b && vite build (también comprueba los tipos)
 npm run lint     # oxlint
 ```
 
-Antes de dar una tarea por terminada, `npm test`, `npm run build` y `npm run lint` tienen que pasar, con la excepción temporal que se explica al final de este archivo.
+Antes de dar una tarea por terminada, `npm test`, `npm run build` y `npm run lint` tienen que pasar.
 
 ## Arquitectura
 
@@ -37,12 +37,3 @@ Antes de dar una tarea por terminada, `npm test`, `npm run build` y `npm run lin
 - Accesibilidad: `aria-label` en los botones que solo tienen un icono, `role="switch"` / `role="radiogroup"` donde toca y `aria-hidden` en lo decorativo.
 - Estilo de código: sin punto y coma, comillas simples y 2 espacios. Imita el archivo que estés tocando.
 - No añadas dependencias sin un motivo claro. Si añades una, que encaje visualmente con el tema.
-
-## ⚠️ Funcionalidad reservada para el desarrollador
-
-La **comprobación de que la partida cuadra** (comparar lo aportado con lo que hay en la mesa y el componente `BalanceBanner`) se ha quitado a propósito para que el propietario del repo la implemente como ejercicio, siguiendo [`docs/guia-comprobar-cuadre.md`](docs/guia-comprobar-cuadre.md).
-
-- **No la implementes**, ni entera ni en parte (incluidos `totalInvested` / `totalFinal` / `difference` en `GameResults`), salvo que el usuario lo pida de forma explícita.
-- Mientras tanto, **es normal** que 2 tests de `src/lib/calc.test.ts` fallen ("…y comprueba que cuadra" y "detecta cuando las fichas no cuadran") y que `npm run build` dé errores de tipos en ese archivo. No los borres, no los saltes (`.skip`) y no los "arregles": son el punto de partida del ejercicio. Cualquier otro fallo sí hay que corregirlo.
-- Si te pide ayuda con ella, **haz de tutor**: haz preguntas, señala dónde está el error y da pistas, pero no escribas la solución salvo que te la pida directamente.
-- Cuando esté terminada, borra esta sección.

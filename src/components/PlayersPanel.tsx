@@ -62,7 +62,12 @@ export function PlayersPanel({ game, results, dispatch }: Props) {
       </button>
 
       {game.players.length > 0 ? (
-        <BalanceBanner results={results} currency={game.currency} />
+        // En escritorio el aviso de que no cuadra ya sale en la columna de resultados
+        <BalanceBanner
+          results={results}
+          currency={game.currency}
+          className={results.difference !== 0 ? 'lg:hidden' : undefined}
+        />
       ) : null}
     </div>
   )

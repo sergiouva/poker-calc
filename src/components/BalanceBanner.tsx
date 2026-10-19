@@ -6,9 +6,10 @@ import type { Currency } from '../lib/types'
 interface Props {
   results: GameResults
   currency: Currency
+  className?: string
 }
 
-export function BalanceBanner({ results, currency }: Props) {
+export function BalanceBanner({ results, currency, className }: Props) {
   const ok = results.difference === 0
 
   return (
@@ -17,6 +18,7 @@ export function BalanceBanner({ results, currency }: Props) {
       className={cn(
         'flex items-start gap-2.5 rounded-xl border px-3 py-2.5 text-[13px] leading-snug',
         ok ? 'border-win/35 bg-win/10 text-win' : 'border-warn/35 bg-warn/10 text-warn',
+        className,
       )}
     >
       <span aria-hidden>{ok ? '✓' : '!'}</span>

@@ -76,9 +76,19 @@ docs/                    Guías
 
 La paleta, la tipografía y los mockups de móvil y escritorio están en [`design/mockups.html`](design/mockups.html). Ábrelo en el navegador o impórtalo en Figma con el plugin **html.to.design**.
 
+## Despliegue
+
+La web está en [Vercel](https://vercel.com), conectada a este repositorio:
+
+- Cada push a `main` publica en producción.
+- Cada push a otra rama genera una URL de vista previa.
+
+Vercel detecta Vite solo (build `npm run build`, salida `dist/`), así que no hace falta configuración extra. La versión de Node sale del campo `engines` de `package.json`.
+
 ## Por hacer
 
-- [ ] **Comprobar que la partida cuadra**: guía paso a paso en [`docs/guia-comprobar-cuadre.md`](docs/guia-comprobar-cuadre.md)
-- [ ] Elegir la fuente definitiva de los títulos
+- [x] Comprobar que la partida cuadra (guía en [`docs/guia-comprobar-cuadre.md`](docs/guia-comprobar-cuadre.md))
+- [x] Elegir la fuente definitiva de los títulos (Outfit)
+- [x] Despliegue
 - [ ] Animación de ficha girando
-- [ ] Despliegue
+- [ ] Retos extra de la guía
